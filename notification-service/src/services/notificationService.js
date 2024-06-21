@@ -30,7 +30,7 @@ const sendEmailNotification = async (email, amount) => {
 };
 
 const sendMobileNotification = (mobile, amount) => {
-  // Implementation for sending mobile notifications
+
   logger.info(`Mobile notification sent to ${mobile}`);
 };
 

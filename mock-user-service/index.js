@@ -4,11 +4,10 @@ const app = express();
 app.use(express.json());
 
 const users = {
-  '1': { id: '1', name: 'John Doe', email: 'john.doe@example.com', mobile: '1234567890' },
-  '2': { id: '2', name: 'Jane Smith', email: 'jane.smith@example.com', mobile: '0987654321' },
+  '1': { id: '1', name: 'John', email: 'john@gmail.com', mobile: '0704567890' },
+  '2': { id: '2', name: 'Jane', email: 'jane@mail.com', mobile: '09087654321' },
 };
 
-// GET user by ID
 app.get('/users/:id', (req, res) => {
   const user = users[req.params.id];
   if (user) {
@@ -18,7 +17,6 @@ app.get('/users/:id', (req, res) => {
   }
 });
 
-// POST to update user by ID
 app.post('/users/:id', (req, res) => {
   const userId = req.params.id;
   const newUserData = req.body;

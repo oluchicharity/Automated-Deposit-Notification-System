@@ -21,7 +21,6 @@ const config = {
   }
 };
 
-// Setup logger
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
@@ -31,7 +30,6 @@ const logger = winston.createLogger({
   ]
 });
 
-// Setup email transporter
 const transporter = nodemailer.createTransport({
   host: config.emailService.host,
   port: config.emailService.port,
@@ -42,25 +40,20 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Notification endpoint
 app.post('/notify', async (req, res) => {
   const { userId, amount, notificationType } = req.body;
 
   try {
-    // Fetch user information
     const userResponse = await axios.get(`${config.userServiceUrl}/users/${userId}`);
     const user = userResponse.data;
 
-    // Check wallet balance
     const walletResponse = await axios.get(`${config.walletServiceUrl}/wallet/${userId}`);
     const wallet = walletResponse.data;
 
     if (wallet.balance < amount) {
       if (notificationType === config.notificationType.mobile) {
-        // Send mobile notification (mocked)
         logger.info(`Sending mobile notification to ${user.mobile}`);
       } else if (notificationType === config.notificationType.email) {
-        // Send email notification
         const mailOptions = {
           from: config.emailService.user,
           to: user.email,
