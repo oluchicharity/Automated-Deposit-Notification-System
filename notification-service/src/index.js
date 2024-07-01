@@ -35,7 +35,7 @@ async function sendNotification(userId, amount, notificationType) {
       if (notificationType === config.notificationType.email) {
         const mailOptions = {
           from: 'finsworthpro@gmail.com',
-          to: 'oluchicharity10@gmail.com',
+          to: user.email,
           subject: 'Failed Automated Deposit Notification',
           text: `Dear ${user.name},\n\nYour automated deposit of $${amount} failed due to insufficient funds in your wallet. Please add funds to your wallet to continue using the service.\n\nBest Regards,\nYour Service Team`
         };
@@ -43,7 +43,6 @@ async function sendNotification(userId, amount, notificationType) {
         await transporter.sendMail(mailOptions);
         logger.info(`Email notification sent to ${user.email} about failed deposit of ${amount} due to insufficient funds.`);
       } else if (notificationType === config.notificationType.mobile) {
-       
         logger.info(`Mobile notification sent to ${user.mobile} about failed deposit of ${amount} due to insufficient funds.`);
       }
     }

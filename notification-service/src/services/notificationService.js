@@ -5,18 +5,17 @@ const errorHandler = require('../utils/errorHandler');
 
 const sendEmailNotification = async (email, amount) => {
   const transporter = nodemailer.createTransport({
-    host: emailService.host,
-    port: emailService.port,
+    host: 'smtp.gmail.com',
+    port: 587,
     secure: false,
     auth: {
-      user: emailService.user,
-      pass: emailService.pass
+      user: 'finsworthpro@gmail.com',
+      pass: 'bxto xjhh nddv blpa'
     }
   });
-
   const mailOptions = {
     from: emailService.user,
-    to: email,
+    to: user.email,
     subject: 'Failed Automated Deposit',
     text: `Your automated deposit of ${amount} has failed due to insufficient funds. Please add funds to your wallet.`
   };
